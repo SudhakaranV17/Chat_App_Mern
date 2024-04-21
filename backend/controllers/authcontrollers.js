@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs"
 import generateToken from "../utils/generateToken.js";
 
 
+/** @type {import("express").RequestHandler} */
 export const signUp = async (req, res) => {
     try {
         const { fullName, username, password, confirmPassword, gender } = req.body
@@ -45,8 +46,9 @@ export const signUp = async (req, res) => {
         res.status(500).json({ error: err.message })
     }
 }
-
+/** @type {import("express").RequestHandler} */
 export const login = async (req, res) => {
+
     try {
         const { username, password } = req.body;
         const user = await User.findOne({ username });
