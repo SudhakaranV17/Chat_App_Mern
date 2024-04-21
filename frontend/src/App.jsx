@@ -1,13 +1,14 @@
 import "./App.scss";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Home from "./pages/home/Home";
+// import Header from "./components/Header";
+// import Footer from "./components/Footer";
 
 function App() {
   return (
     <>
-      <Header />
-      <div className="text-danger">Home</div>
-      <Footer />
+      <div className="p-4 h-screen flex justify-center items-center">
+        <Home />
+      </div>
     </>
   );
 }
