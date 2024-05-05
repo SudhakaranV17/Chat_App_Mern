@@ -25,7 +25,7 @@ export const signUp = async (req, res) => {
             username,
             password: hashedPassword,
             gender,
-            profilePicture: gender === 'Male' ? boyProfilePic : girlProfilePic
+            profilepic: gender === 'Male' ? boyProfilePic : girlProfilePic
         })
         if (newUser) {
             generateToken(newUser._id, res)
@@ -35,7 +35,7 @@ export const signUp = async (req, res) => {
                 fullName: newUser.fullName,
                 username: newUser.username,
                 gender: newUser.gender,
-                profilePicture: newUser.profilePicture
+                profilepic: newUser.profilepic
             })
         } else {
             res.status(400).json({ error: "Invalid User Data" });
@@ -63,7 +63,7 @@ export const login = async (req, res) => {
             username: user.username,
             fullname: user.fullName,
             gender: user.gender,
-            profilePicture: user.profilePicture
+            profilepic: user.profilepic
         })
     } catch (error) {
         console.log("Error in login user: " + error.message);

@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 function Login() {
   return (
@@ -10,33 +10,36 @@ function Login() {
         </h1>
         <form action="">
           <div className="">
-            <label htmlFor="" className="label p-2">
+            <label htmlFor="username" className="label p-2">
               <span className="text-base label-text">UserName</span>
             </label>
             <input
               type="text"
-              name=""
-              id=""
+              name="username"
+              id="username"
               placeholder="Enter UserName"
               className="w-full input input-bordered h-10"
             />
           </div>
 
           <div className="">
-            <label htmlFor="" className="label p-2">
+            <label htmlFor="password" className="label p-2">
               <span className="text-base label-text">Password</span>
             </label>
             <input
               type="text"
-              name=""
-              id=""
+              name="password"
+              id="password"
               placeholder="Enter Password"
               className="w-full input input-bordered h-10"
             />
           </div>
-          <a className="link link-primary mt-3 inline-block text-sm hover:underline">
+          <Link
+            to="/signup"
+            className="link link-primary mt-3 inline-block text-sm hover:underline"
+          >
             {"Don't"} have an account?
-          </a>
+          </Link>
           <div className="">
             <button className="btn btn-block btn-sm mt-3">Login</button>
           </div>
