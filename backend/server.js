@@ -5,12 +5,13 @@ import connectMongo from "./db/connectDB.js";
 import authRoutes from "./routes/authroutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
-
+import cors from "cors"
 
 const app = express();
 dotenv.config();
 const port = process.env.PORT || 4000;
 
+app.use(cors())
 app.use(express.json()); //  Middleware for parsing JSON bodies
 app.use(cookieParser()) // Adds middleware that parses cookies and exposes them on req.cookies
 
