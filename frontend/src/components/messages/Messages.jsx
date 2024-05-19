@@ -1,19 +1,30 @@
-import React from "react";
+import { useEffect, useRef } from "react";
+import useGetMessages from "../../hooks/useGetMessages";
+import MessageSkeleton from "../skeletons/Messageskeletons";
 import Message from "./Message";
 
 function Messages() {
+  const { messages, loading } = useGetMessages();
+  const lastmsgRef = useRef();
+  lastmsgRef.current?.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => {
+    setTimeout(() => {
+      lastmsgRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 5);
+  }, [messages]);
   return (
     <div className="px-4 flex-1 overflow-auto">
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
+      {!loading &&
+        messages.length > 0 &&
+        messages.map((message) => (
+          <div className="" key={message._id} ref={lastmsgRef}>
+            <Message message={message} />
+          </div>
+        ))}
+      {loading && [...Array(3)].map((_, idx) => <MessageSkeleton key={idx} />)}
+      {!loading && messages.length === 0 && (
+        <p className="text-center">Send a Message to Start Conversation.</p>
+      )}
     </div>
   );
 }

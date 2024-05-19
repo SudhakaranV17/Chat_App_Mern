@@ -62,8 +62,8 @@ export const getMessage = async (req, res) => {
         // SAVE COVERSATION AND MESSAGE TO DATABASE
 
     } catch (error) {
-        console.log("Error in  sending message: ", error.message);
-        res.status(500).json({ error: `Error on Sending Message ${error.message}` });
+        console.log("Error in  getting message: ", error.message);
+        res.status(500).json({ error: `Error on Getting Message ${error.message}` });
     }
 
 }

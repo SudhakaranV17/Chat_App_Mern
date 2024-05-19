@@ -1,8 +1,8 @@
-import useGetConversation from "../../hooks/useGetConversation";
+import useGetConversations from "../../hooks/useGetConversations";
 import Convo from "./Convo";
 
 function Conversations() {
-  const { loading, conversations } = useGetConversation();
+  const { loading, conversations } = useGetConversations();
   return (
     <div className="py-2 flex flex-col overflow-auto">
       {conversations.map((conversation, idx) => (
