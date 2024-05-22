@@ -6,8 +6,8 @@ import authRoutes from "./routes/authroutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import cors from "cors"
+import { app, server } from "./socket/socket.js"
 
-const app = express();
 dotenv.config();
 const port = process.env.PORT || 4000;
 
@@ -21,7 +21,7 @@ app.use("/api/message", messageRoutes);
 app.use("/api/users", userRoutes);
 
 
-app.listen(port, () => {
+server.listen(port, () => {
     connectMongo();
     console.log(`Server is running on port ${port}`);
 });
