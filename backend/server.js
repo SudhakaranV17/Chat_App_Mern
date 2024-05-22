@@ -10,7 +10,7 @@ import cors from "cors"
 import { app, server } from "./socket/socket.js"
 
 dotenv.config();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 const __dirname = path.resolve()
 app.use(cors())
 app.use(express.json()); //  Middleware for parsing JSON bodies
