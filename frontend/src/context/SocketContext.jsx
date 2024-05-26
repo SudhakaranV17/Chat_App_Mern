@@ -11,11 +11,11 @@ export const SocketContextProvider = ({ children }) => {
   const { authUser } = useAuthContext();
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
-
+  const [seen, setSeen] = useState("");
   useEffect(() => {
     // init socket client
     if (authUser) {
-      const socket = io("https://chat-app-mern-n4aw.onrender.com/", {
+      const socket = io("http://localhost:3000", {
         query: {
           userId: authUser.id,
         },
@@ -30,6 +30,9 @@ export const SocketContextProvider = ({ children }) => {
       socket.on("getOnlineUsers", (users) => {
         setOnlineUsers(users);
       });
+      socket.on("getLastSeen", (ltime) => {
+        setSeen(ltime);
+      });
       //   return socket
       return () => {
         socket.close();
@@ -39,7 +42,7 @@ export const SocketContextProvider = ({ children }) => {
       socket.close();
       setSocket(null);
     }
-  }, [authUser]);
+  }, [authUser, seen]);
 
   return (
     // return context provider

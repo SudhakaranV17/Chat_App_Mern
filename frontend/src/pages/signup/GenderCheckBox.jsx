@@ -8,12 +8,12 @@ function GenderCheckBox({ onCheckBoxChange, selectedGender }) {
             selectedGender === "Male" ? "selected" : ""
           }`}
         >
-          <span className="label-text">Male</span>
+          <span className="text-white">Male</span>
           <input
             type="checkbox"
             name="male"
             id="male"
-            className="checkbox  border-slate-900"
+            className="checkbox [--chkbg:theme(colors.indigo.600)] border-indigo-400"
             checked={selectedGender === "Male"}
             onChange={() => onCheckBoxChange("Male")}
           />
@@ -26,12 +26,12 @@ function GenderCheckBox({ onCheckBoxChange, selectedGender }) {
             selectedGender === "Female" ? "selected" : ""
           }`}
         >
-          <span className="label-text">Female</span>
+          <span className="text-white">Female</span>
           <input
             type="checkbox"
             name="female"
             id="female"
-            className="checkbox  border-slate-900"
+            className="checkbox [--chkbg:theme(colors.indigo.600)] border-indigo-400"
             checked={selectedGender === "Female"}
             onChange={() => onCheckBoxChange("Female")}
           />

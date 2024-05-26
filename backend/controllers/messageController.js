@@ -53,23 +53,67 @@ export const sendMessage = async (req, res) => {
  * */
 export const getMessage = async (req, res) => {
     try {
-        // SENDING COVERSATION AND MESSAGES TO USERS FROM DATABASES
+        const { id: userToChatId } = req.params;  // ID of the other user in the conversation
+        const userId = req.user._id;  // ID of the current user
+
+        // Find the conversation involving both users
+        const conversation = await Conversation.findOne({
+            participants: { $all: [userId, userToChatId] },
+        }).populate({
+            path: 'messages',
+            match: {
+                $or: [
+                    { senderId: userId, deletedForSender: false },
+                    { receiverId: userId, deletedForReceiver: false }
+                ]
+            }
+        });
+
+        if (conversation) {
+            // Send the filtered messages to the client
+            res.status(200).json(conversation.messages);
+        } else {
+            res.status(404).json({ error: "Conversation not found" });
+        }
+
+    } catch (error) {
+        console.error("Error in retrieving messages:", error.message);
+        res.status(500).json({ error: `Error in retrieving messages: ${error.message}` });
+    }
+};
+
+/** 
+ * 
+ * @type {import("express").RequestHandler} 
+ * */
+export const clearMessages = async (req, res) => {
+    try {
         const { id: userToChatId } = req.params;
         const senderId = req.user._id;
 
         const conversation = await Conversation.findOne({
             participants: { $all: [senderId, userToChatId] },
-        }).populate("messages");
-        res.status(200).json(conversation?.messages || []);
-        // SOCKET IO FUNCTIONALITY COMES HERE
+        }).populate('messages');
 
+        if (conversation) {
+            const updateMessages = conversation.messages.map(async (message) => {
+                if (message.senderId.toString() === senderId.toString()) {
+                    return Message.findByIdAndUpdate(message._id, { deletedForSender: true });
+                } else if (message.receiverId.toString() === senderId.toString()) {
+                    return Message.findByIdAndUpdate(message._id, { deletedForReceiver: true });
+                }
+            });
 
+            await Promise.all(updateMessages);
 
-        // SAVE COVERSATION AND MESSAGE TO DATABASE
+            res.status(200).json({ message: 'Messages cleared for the user' });
+        } else {
+            res.status(404).json({ error: "Conversation not found" });
+        }
 
     } catch (error) {
-        console.log("Error in  getting message: ", error.message);
-        res.status(500).json({ error: `Error on Getting Message ${error.message}` });
+        console.error("Error in clearing messages:", error.message);
+        res.status(500).json({ error: `Error in clearing messages: ${error.message}` });
     }
 
 }

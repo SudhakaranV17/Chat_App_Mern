@@ -9,7 +9,7 @@ function Message({ message }) {
   const profilepic = fromMe
     ? authUser.profilepic
     : selectedConversation?.profilepic;
-  const chatColor = fromMe ? "bg-blue-500" : "";
+  const chatColor = fromMe ? "bg-indigo-600" : "";
   const createTime = () => {
     const date = new Date(message.createdAt);
     const time = date.toLocaleTimeString("en-US", {
@@ -25,8 +25,11 @@ function Message({ message }) {
           <img src={profilepic} alt="" />
         </div>
       </div>
-      <div className={`chat-bubble  ${chatColor} `}>{message.message}</div>
-      <div className="chat-footer opacity-50 text-xs gap-2 flex items-center">
+      <div className={`chat-bubble  ${chatColor} text-white`}>
+        {message.message}
+        {/* <div className="flex justify-end block text-sm">{createTime()}</div> */}
+      </div>
+      <div className="chat-footer opacity-50 text-xs gap-2 flex items-center text-white">
         {createTime()}
       </div>
     </div>

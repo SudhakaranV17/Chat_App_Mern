@@ -16,7 +16,7 @@ function MessageInput() {
   };
   return (
     <form className="px-4 my-3" onSubmit={handleSubmit}>
-      <div className="w-full relative">
+      <div className="w-full relative ">
         <input
           type="text"
           name=""
@@ -24,11 +24,11 @@ function MessageInput() {
           placeholder="Send a message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="border text-sm rounded-lg block w-full p-2.5 bg-transparent border-gray-300 focus-visible:none"
+          className="border text-sm text-gray-200 rounded-lg block w-full p-2.5 bg-transparent border-gray-300 focus-visible:none"
         />
         <button
           type="submit"
-          className="absolute inset-y-0 end-0 flex items-center pe-3"
+          className="absolute inset-y-0 end-0 flex items-center pe-3 text-white"
         >
           {loading ? (
             <div className="loading loading-spinner"></div>

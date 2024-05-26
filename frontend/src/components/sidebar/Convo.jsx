@@ -9,8 +9,8 @@ function Convo({ conversation, lastindex }) {
   return (
     <>
       <div
-        className={`flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer ${
-          isSelected ? "bg-sky-400" : ""
+        className={`flex gap-2 items-center hover:bg-indigo-500 rounded p-2 py-1 cursor-pointer ${
+          isSelected ? "bg-indigo-400" : ""
         }`}
         onClick={() => {
           setSelectedConversation(conversation);
@@ -23,8 +23,14 @@ function Convo({ conversation, lastindex }) {
         </div>
         <div className="flex  flex-col flex-1">
           <div className="flex gap-3 justify-between">
-            <p className="font-bold text-gray-400">{conversation.fullName}</p>
-            <span className="text-xl ">1d</span>
+            <p className="font-bold text-white">{conversation.fullName}</p>
+            <span
+              className={`text-xl  ${
+                isSelected ? "text-white" : "text-green-500"
+              }`}
+            >
+              {isOnline ? "online" : ""}
+            </span>
           </div>
         </div>
       </div>
